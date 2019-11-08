@@ -21,7 +21,33 @@ player = Player("Name", world.startingRoom)
 
 
 # FILL THIS IN
-traversalPath = ['n', 's']
+#To do this, you will need to write a traversal algorithm that logs the path into traversalPath as it walks
+
+traversalPath = []
+visited = {0: {'n': '?', 's': '?', 'w': '?', 'e': '?'}} #start in room 0. direction is ? until we explore
+
+reverseDirections = {
+    'n': 's',
+    'e': 'w',
+    'w': 'e',
+    's': 'n'
+}
+
+
+
+
+okay = len(roomGraph)
+
+print(f"HELLOOOOOOOOO {okay}")
+
+
+
+
+
+
+
+
+
 
 
 # TRAVERSAL TEST
