@@ -23,22 +23,77 @@ player = Player("Name", world.startingRoom)
 # FILL THIS IN
 #To do this, you will need to write a traversal algorithm that logs the path into traversalPath as it walks
 
+# traversalPath = []
+# visited = {0: {'n': '?', 's': '?', 'w': '?', 'e': '?'}} #start in room 0. direction is ? until we explore
+
+# reverseDirections = {
+#     'n': 's',
+#     'e': 'w',
+#     'w': 'e',
+#     's': 'n'
+# }
+
+
+class Queue():
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, value):
+        self.queue.append(value)
+
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+
+    def size(self):
+        return len(self.queue)
+
 traversalPath = []
-visited = {0: {'n': '?', 's': '?', 'w': '?', 'e': '?'}} #start in room 0. direction is ? until we explore
-
-reverseDirections = {
-    'n': 's',
-    'e': 'w',
-    'w': 'e',
-    's': 'n'
-}
+traversalGraph = {}
 
 
+def startingGraph():
+    node = {}
+    for i in player.currentRoom.getExits():
+        node[i] = '?'
+    traversalGraph[player.currentRoom.id] = node
 
 
-okay = len(roomGraph)
 
-print(f"HELLOOOOOOOOO {okay}")
+
+
+def reverseDirection(direction):
+    oppDirections = {
+        'n': 's',
+        'e': 'w',
+        'w': 'e',
+        's': 'n'
+    }
+    
+    return oppDirections[direction]
+
+
+
+def bfsShortestPath(starting_vertex):
+    q = Queue()
+    q.enqueue([starting_vertex])
+    visited = set()
+    while q.size() > 0:
+        path = q.dequeue()
+        vertex = path[-1]
+        # returns an object of all values in the dictionary
+        if "?" in traversalGraph[vertex].values():
+            return path
+            
+        if vertex not in visited:
+            visited.add(vertex)
+            for neighbor in traversalGraph[vertex].values():
+                copy_path = list(path)
+                copy_path.append(neighbor)
+                q.enqueue(copy_path)
+
 
 
 
