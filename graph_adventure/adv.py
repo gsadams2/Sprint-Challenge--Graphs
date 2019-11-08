@@ -52,6 +52,10 @@ class Queue():
 
 traversalPath = []
 traversalGraph = {}
+directionEast = "e"
+directionWest = "w"
+directionNorth = "n"
+directionSouth = "s"
 
 
 def startingGraph():
@@ -59,9 +63,6 @@ def startingGraph():
     for i in player.currentRoom.getExits():
         node[i] = '?'
     traversalGraph[player.currentRoom.id] = node
-
-
-
 
 
 def reverseDirection(direction):
@@ -95,14 +96,35 @@ def bfsShortestPath(starting_vertex):
                 q.enqueue(copy_path)
 
 
+def traverseGraph():
+    # populate the first node with "?"
+    if len(traversalGraph) == 0:
+        startingGraph()
 
+    while len(traversalGraph) < len(roomGraph):
 
+        if "?" in traversalGraph[player.currentRoom.id].values():
+            currentRoom = player.currentRoom.id
+            
+            #step 1: go every direction possible. n, e, s, and w
+            
+            # okayBro = [directionEast, directionWest, directionNorth, directionSouth]
+            # for directionBro in okayBro:
+            
 
+            # travel in every direction
+            #player.travel(something)
+            #traversalPath.append(something)
 
+            # log the direction 
+            # traversalGraph[currentRoom][something] = player.currentRoom.id
 
+        else:
+            # reversePath = bfsShortestPath(player.currentRoom.id)
+            pass
 
-
-
+           
+traverseGraph()
 
 
 # TRAVERSAL TEST
